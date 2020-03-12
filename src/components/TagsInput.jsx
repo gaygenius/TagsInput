@@ -1,18 +1,15 @@
 import React, { useState, createRef, useEffect } from 'react';
 import colors from '../colors.json';
+import {
+  stringCaseInsensitiveContains,
+  stringCaseInsensitivePresent,
+} from '../utils';
 
 const KEYCODE_BACK_SPACE = 8;
 const KEYCODE_ENTER = 13;
 const KEYCODE_ESCAPE = 27;
 const KEYCODE_UP_ARROW = 38;
 const KEYCODE_DOWN_ARROW = 40;
-
-const stringCaseInsensitiveContains = (string, substringToFind) =>
-  string.toUpperCase().indexOf(substringToFind.toUpperCase()) !== -1;
-const stringsCaseInsensitiveEqual = (a, b) =>
-  a.toUpperCase() === b.toUpperCase();
-const stringCaseInsensitivePresent = (strings, stringToFind) =>
-  strings.find(string => stringsCaseInsensitiveEqual(string, stringToFind));
 
 export default function TagsInput() {
   const [tagInput, setTagInput] = useState('');
@@ -96,7 +93,7 @@ export default function TagsInput() {
   };
   useEffect(focusInput, []);
   return (
-    <>
+    <div className="tags-input-container">
       <div className="tags-input">
         {tags.map(tag => (
           <div
@@ -116,17 +113,19 @@ export default function TagsInput() {
           ref={tagInputRef}
         ></input>
       </div>
-      <div className="tags-autocomplete">
-        {tagSuggestions.map((tagSuggestion, index) => (
-          <div
-            key={tagSuggestion}
-            className={index === tagSuggestionIndex ? 'selected' : ''}
-            onClick={() => handleSuggestionClick(tagSuggestion)}
-          >
-            {tagSuggestion}
-          </div>
-        ))}
-      </div>
-    </>
+      {tagSuggestions.length > 0 && (
+        <div className="tags-autocomplete">
+          {tagSuggestions.map((tagSuggestion, index) => (
+            <div
+              key={tagSuggestion}
+              className={index === tagSuggestionIndex ? 'selected' : ''}
+              onClick={() => handleSuggestionClick(tagSuggestion)}
+            >
+              {tagSuggestion}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
