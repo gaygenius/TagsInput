@@ -19,6 +19,10 @@ body {
   padding: 40px;
 }
 
+.tags-input-container {
+  position: relative;
+}
+
 .tags-input {
   display: flex;
   border: 1px solid black;
@@ -39,16 +43,12 @@ body {
 .tags-autocomplete {
   position: absolute;
   background-color: white;
-  height: 100px;
   overflow-y: scroll;
   border: 1px solid black;
+  height: 325%;
   width: 100%;
 }
 
 .tags-autocomplete > .selected {
   font-weight: bolder;
-}
-
-.tags-input-container {
-  position: relative;
 }

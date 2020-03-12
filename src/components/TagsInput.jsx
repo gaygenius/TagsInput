@@ -5,11 +5,13 @@ import {
   stringCaseInsensitivePresent,
 } from '../utils';
 
-const KEYCODE_BACK_SPACE = 8;
-const KEYCODE_ENTER = 13;
-const KEYCODE_ESCAPE = 27;
-const KEYCODE_UP_ARROW = 38;
-const KEYCODE_DOWN_ARROW = 40;
+const keyCodes = {
+  KEYCODE_BACK_SPACE: 8,
+  KEYCODE_ENTER: 13,
+  KEYCODE_ESCAPE: 27,
+  KEYCODE_UP_ARROW: 38,
+  KEYCODE_DOWN_ARROW: 40,
+};
 
 export default function TagsInput() {
   const [tagInput, setTagInput] = useState('');
@@ -36,29 +38,32 @@ export default function TagsInput() {
     clearTagInputAndSuggestions();
   };
   const handleKeyDown = e => {
-    if (e.keyCode === KEYCODE_ENTER) {
+    if (e.keyCode === keyCodes.KEYCODE_ENTER) {
       clearTagInputAndSuggestions();
       if (tagInput.length > 0) {
         const tagToAdd =
           tagSuggestionIndex === null
             ? tagInput
-            : tagSuggestions[tagSuggestionIndex];
+            : tagSuggestions[tagSuggestionIndex].tagName;
         addTag(tagToAdd);
       }
       return;
     }
-    if (e.keyCode === KEYCODE_BACK_SPACE) {
+    if (e.keyCode === keyCodes.KEYCODE_BACK_SPACE) {
       if (tagInput.length === 0 && tags.length > 0) {
         removeTag(tags[tags.length - 1]);
       }
       return;
     }
-    if (e.keyCode === KEYCODE_ESCAPE) {
+    if (e.keyCode === keyCodes.KEYCODE_ESCAPE) {
       clearTagInputAndSuggestions();
       return;
     }
-    const isUpArrow = e.keyCode === KEYCODE_UP_ARROW;
-    const isDownArrow = e.keyCode === KEYCODE_DOWN_ARROW;
+    if (tagSuggestions.length === 0) {
+      return;
+    }
+    const isUpArrow = e.keyCode === keyCodes.KEYCODE_UP_ARROW;
+    const isDownArrow = e.keyCode === keyCodes.KEYCODE_DOWN_ARROW;
     if (!isUpArrow && !isDownArrow) {
       return;
     }
@@ -66,13 +71,13 @@ export default function TagsInput() {
       setTagSuggestionIndex(0);
       return;
     }
-    if (isUpArrow) {
-      setTagSuggestionIndex(Math.max(tagSuggestionIndex - 1, 0));
-    } else {
-      setTagSuggestionIndex(
-        Math.min(tagSuggestionIndex + 1, tagSuggestions.length - 1)
-      );
-    }
+    const newTagSuggestionIndex = isUpArrow
+      ? Math.max(tagSuggestionIndex - 1, 0)
+      : Math.min(tagSuggestionIndex + 1, tagSuggestions.length - 1);
+    setTagSuggestionIndex(newTagSuggestionIndex);
+    tagSuggestions[newTagSuggestionIndex].ref.current.scrollIntoView({
+      block: 'nearest',
+    });
   };
   const handleTagInputChange = e => {
     const typedTag = e.target.value;
@@ -84,7 +89,10 @@ export default function TagsInput() {
           stringCaseInsensitiveContains(name, typedTag) &&
           !stringCaseInsensitivePresent(tags, name)
       )
-      .map(color => color.name);
+      .map(color => ({
+        tagName: color.name,
+        ref: createRef(),
+      }));
     setTagSuggestions(matchingColors);
   };
   const handleSuggestionClick = tagSuggestion => {
@@ -115,13 +123,14 @@ export default function TagsInput() {
       </div>
       {tagSuggestions.length > 0 && (
         <div className="tags-autocomplete">
-          {tagSuggestions.map((tagSuggestion, index) => (
+          {tagSuggestions.map(({ tagName, ref }, index) => (
             <div
-              key={tagSuggestion}
+              key={tagName}
+              ref={ref}
               className={index === tagSuggestionIndex ? 'selected' : ''}
-              onClick={() => handleSuggestionClick(tagSuggestion)}
+              onClick={() => handleSuggestionClick(tagName)}
             >
-              {tagSuggestion}
+              {tagName}
             </div>
           ))}
         </div>
