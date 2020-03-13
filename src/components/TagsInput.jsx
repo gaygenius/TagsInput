@@ -19,11 +19,17 @@ export default function TagsInput() {
   const [tagSuggestions, setTagSuggestions] = useState([]);
   const [tagSuggestionIndex, setTagSuggestionIndex] = useState(null);
   const tagInputRef = createRef();
+  const clearTagSuggestions = () => {
+    setTagSuggestions([]);
+    setTagSuggestionIndex(null);
+  };
   const clearTagInputAndSuggestions = () => {
     setTagInput('');
-    setTagSuggestions([]);
+    clearTagSuggestions();
   };
-  const focusInput = () => tagInputRef.current.focus();
+  const focusInput = () => {
+    tagInputRef.current.focus();
+  };
   const addTag = tagToAdd => {
     if (!stringCaseInsensitivePresent(tags, tagToAdd)) {
       setTags(() => [...tags, tagToAdd]);
@@ -31,7 +37,23 @@ export default function TagsInput() {
   };
   const removeTag = tagToRemove => {
     setTags(() => tags.filter(tag => tag !== tagToRemove));
-    focusInput();
+  };
+  const autocomplete = typedInput => {
+    clearTagSuggestions();
+    if (typedInput.length === 0) {
+      return;
+    }
+    const matchingColors = colors
+      .filter(
+        ({ name }) =>
+          stringCaseInsensitiveContains(name, typedInput) &&
+          !stringCaseInsensitivePresent(tags, name)
+      )
+      .map(color => ({
+        tagName: color.name,
+        ref: createRef(),
+      }));
+    setTagSuggestions(matchingColors);
   };
   const handleRemoveTag = tagToRemove => {
     removeTag(tagToRemove);
@@ -80,28 +102,20 @@ export default function TagsInput() {
     });
   };
   const handleTagInputChange = e => {
-    const typedTag = e.target.value;
-    setTagInput(typedTag);
-    setTagSuggestionIndex(null);
-    const matchingColors = colors
-      .filter(
-        ({ name }) =>
-          stringCaseInsensitiveContains(name, typedTag) &&
-          !stringCaseInsensitivePresent(tags, name)
-      )
-      .map(color => ({
-        tagName: color.name,
-        ref: createRef(),
-      }));
-    setTagSuggestions(matchingColors);
+    const typedInput = e.target.value;
+    setTagInput(typedInput);
+    autocomplete(typedInput);
   };
   const handleSuggestionClick = tagSuggestion => {
     clearTagInputAndSuggestions();
     addTag(tagSuggestion);
   };
+  const handleContainerClick = () => {
+    focusInput();
+  };
   useEffect(focusInput, []);
   return (
-    <div className="tags-input-container">
+    <div className="tags-input-container" onClick={handleContainerClick}>
       <div className="tags-input">
         {tags.map(tag => (
           <div
