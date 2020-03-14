@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TagsInput from './components/TagsInput';
+import colors from './colors.json';
 
 import './styles.css';
 
 function App() {
   return (
     <div className="App">
-      <TagsInput />
+      <TagsInput autocompleteStrings={colors} />
       <h1>Some other stuff</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis leo

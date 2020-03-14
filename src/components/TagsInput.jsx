@@ -1,5 +1,4 @@
 import React, { useState, createRef, useEffect, useRef } from 'react';
-import colors from '../colors.json';
 import {
   stringCaseInsensitiveContains,
   stringCaseInsensitivePresent,
@@ -13,7 +12,7 @@ const keyCodes = {
   KEYCODE_DOWN_ARROW: 40,
 };
 
-export default function TagsInput() {
+export default function TagsInput({ autocompleteStrings = [] }) {
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState([]);
   const [tagSuggestions, setTagSuggestions] = useState([]);
@@ -44,7 +43,7 @@ export default function TagsInput() {
     if (typedInput.length === 0) {
       return;
     }
-    const matchingColors = colors
+    const autocompleteMatches = autocompleteStrings
       .filter(
         ({ name }) =>
           stringCaseInsensitiveContains(name, typedInput) &&
@@ -54,7 +53,7 @@ export default function TagsInput() {
         tagName: color.name,
         ref: createRef(),
       }));
-    setTagSuggestions(matchingColors);
+    setTagSuggestions(autocompleteMatches);
   };
   const handleTagClick = tagToRemove => {
     removeTag(tagToRemove);
