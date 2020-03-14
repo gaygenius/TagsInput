@@ -4,6 +4,8 @@ import {
   stringCaseInsensitivePresent,
 } from '../utils';
 
+import './TagsInput.css';
+
 const keyCodes = {
   KEYCODE_BACK_SPACE: 8,
   KEYCODE_ENTER: 13,
