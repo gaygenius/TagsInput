@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, { useState, createRef, useEffect, useRef } from 'react';
 import colors from '../colors.json';
 import {
   stringCaseInsensitiveContains,
@@ -18,14 +18,15 @@ export default function TagsInput() {
   const [tags, setTags] = useState([]);
   const [tagSuggestions, setTagSuggestions] = useState([]);
   const [tagSuggestionIndex, setTagSuggestionIndex] = useState(null);
-  const tagInputRef = createRef();
+  const tagContainerRef = useRef();
+  const tagInputRef = useRef();
   const clearTagSuggestions = () => {
     setTagSuggestions([]);
-    setTagSuggestionIndex(null);
   };
   const clearTagInputAndSuggestions = () => {
     setTagInput('');
     clearTagSuggestions();
+    setTagSuggestionIndex(null);
   };
   const focusInput = () => {
     tagInputRef.current.focus();
@@ -55,7 +56,7 @@ export default function TagsInput() {
       }));
     setTagSuggestions(matchingColors);
   };
-  const handleRemoveTag = tagToRemove => {
+  const handleTagClick = tagToRemove => {
     removeTag(tagToRemove);
     clearTagInputAndSuggestions();
   };
@@ -112,16 +113,34 @@ export default function TagsInput() {
   };
   const handleContainerClick = () => {
     focusInput();
+    if (tagSuggestions.length === 0) {
+      autocomplete(tagInput);
+    }
+  };
+  const handleDocumentClick = e => {
+    if (!tagContainerRef.current.contains(e.target)) {
+      clearTagSuggestions();
+    }
   };
   useEffect(focusInput, []);
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick, false);
+    return () => {
+      document.removeEventListener('click', handleDocumentClick, false);
+    };
+  }, []);
   return (
-    <div className="tags-input-container" onClick={handleContainerClick}>
+    <div
+      className="tags-input-container"
+      ref={tagContainerRef}
+      onClick={handleContainerClick}
+    >
       <div className="tags-input">
         {tags.map(tag => (
           <div
             className="tags-tag"
             key={tag}
-            onClick={() => handleRemoveTag(tag)}
+            onClick={() => handleTagClick(tag)}
           >
             x {tag}
           </div>
