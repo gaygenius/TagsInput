@@ -8,7 +8,7 @@ import './styles.css';
 function App() {
   return (
     <div className="App">
-      <TagsInput autocompleteStrings={colors} />
+      <TagsInput autocompleteEntries={colors} />
       <h1>Some other stuff</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis leo

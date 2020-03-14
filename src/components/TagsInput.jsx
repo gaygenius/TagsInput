@@ -12,7 +12,7 @@ const keyCodes = {
   KEYCODE_DOWN_ARROW: 40,
 };
 
-export default function TagsInput({ autocompleteStrings = [] }) {
+export default function TagsInput({ autocompleteEntries = [] }) {
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState([]);
   const [tagSuggestions, setTagSuggestions] = useState([]);
@@ -43,7 +43,7 @@ export default function TagsInput({ autocompleteStrings = [] }) {
     if (typedInput.length === 0) {
       return;
     }
-    const autocompleteMatches = autocompleteStrings
+    const autocompleteMatches = autocompleteEntries
       .filter(
         ({ name }) =>
           stringCaseInsensitiveContains(name, typedInput) &&
