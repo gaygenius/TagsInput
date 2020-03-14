@@ -33,6 +33,7 @@ body {
   border: 1px solid black;
   padding: 0 2px;
   margin: 0 2px;
+  cursor: pointer;
 }
 
 .tags-tag-input {
@@ -47,6 +48,7 @@ body {
   border: 1px solid black;
   height: 325%;
   width: 100%;
+  cursor: pointer;
 }
 
 .tags-autocomplete > .selected {
