@@ -88,6 +88,7 @@ export default function TagsInput({ autocompleteEntries = [] }) {
     }
     const isUpArrow = e.keyCode === keyCodes.KEYCODE_UP_ARROW;
     const isDownArrow = e.keyCode === keyCodes.KEYCODE_DOWN_ARROW;
+
     if (!isUpArrow && !isDownArrow) {
       return;
     }
@@ -153,6 +154,7 @@ export default function TagsInput({ autocompleteEntries = [] }) {
           onKeyDown={handleKeyDown}
           className="tags-tag-input"
           ref={tagInputRef}
+          placeholder="type a tag and press enter"
         ></input>
       </div>
       {tagSuggestions.length > 0 && (
