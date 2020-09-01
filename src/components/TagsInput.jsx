@@ -51,8 +51,8 @@ export default function TagsInput({ autocompleteEntries = [] }) {
           stringCaseInsensitiveContains(name, typedInput) &&
           !stringCaseInsensitivePresent(tags, name)
       )
-      .map(color => ({
-        tagName: color.name,
+      .map(entry => ({
+        tagName: entry.name,
         ref: createRef(),
       }));
     setTagSuggestions(autocompleteMatches);
@@ -119,13 +119,13 @@ export default function TagsInput({ autocompleteEntries = [] }) {
       autocomplete(tagInput);
     }
   };
-  const handleDocumentClick = e => {
-    if (!tagContainerRef.current.contains(e.target)) {
-      clearTagSuggestions();
-    }
-  };
   useEffect(focusInput, []);
   useEffect(() => {
+    const handleDocumentClick = e => {
+      if (!tagContainerRef.current.contains(e.target)) {
+        clearTagSuggestions();
+      }
+    };
     document.addEventListener('click', handleDocumentClick, false);
     return () => {
       document.removeEventListener('click', handleDocumentClick, false);
@@ -154,7 +154,7 @@ export default function TagsInput({ autocompleteEntries = [] }) {
           onKeyDown={handleKeyDown}
           className="tags-tag-input"
           ref={tagInputRef}
-          placeholder="type a tag and press enter"
+          placeholder="type and select or press enter to create new tag"
         ></input>
       </div>
       {tagSuggestions.length > 0 && (

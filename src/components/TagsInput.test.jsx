@@ -9,7 +9,9 @@ const keys = {
 
 const setup = props => {
   const utils = render(<TagsInput {...props} />);
-  const input = utils.getByPlaceholderText('type a tag and press enter');
+  const input = utils.getByPlaceholderText(
+    'type and select or press enter to create new tag'
+  );
   return { input, ...utils };
 };
 

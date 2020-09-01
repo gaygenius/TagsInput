@@ -7,4 +7,12 @@ export default {
   component: TagsInput,
 };
 
-export const Cocktails = () => <TagsInput autocompleteEntries={cocktails} />;
+export const Cocktails = () => (
+  <div>
+    <h1>Cocktails</h1>
+    <TagsInput autocompleteEntries={cocktails} />
+    <blockquote>
+      <i>Start typing names of cocktails and select from dropdown.</i>
+    </blockquote>
+  </div>
+);
