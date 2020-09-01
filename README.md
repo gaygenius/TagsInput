@@ -1,5 +1,7 @@
 # A React TagsInput Component
 
+![#FF0000](https://placehold.it/15/FF0000/000000?text=+) __Note: This is an initial implementation and I plan to refactor it for readability and maintainability.__
+
 I wrote this React tags input component from scratch.
 
 <img width="583" alt="Screen Shot 2020-09-01 at 11 26 36 AM" src="https://user-images.githubusercontent.com/890659/91891558-186ec580-ec46-11ea-98f2-bce39cedb431.png">
