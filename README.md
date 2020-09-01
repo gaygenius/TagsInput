@@ -1,6 +1,6 @@
 # A React TagsInput Component
 
-This React tags input component was written from scratch.
+I wrote this React tags input component from scratch.
 
 ## Description
 
