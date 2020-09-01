@@ -8,17 +8,28 @@ This React component supports selecting tags from a list of entries provided or 
 
 - The **autocompleteEntries** prop is an array of entries with **name** fields. For example:
 
-```json
-[
-  {
-    "name": "Alabama",
-    "abbreviation": "AL"
-  },
-  {
-    "name": "Alaska",
-    "abbreviation": "AK"
-  }
-]
+```javascript
+function App() {
+  const states = [
+    {
+      name: 'Alabama',
+      abbreviation: 'AL',
+    },
+    {
+      name: 'Alaska',
+      abbreviation: 'AK',
+    },
+  ];
+  return (
+    <div className="App">
+      <h1>TagsInput component</h1>
+      <TagsInput autocompleteEntries={states} />
+      <blockquote>
+        <i>Select names of U.S. states or add arbitrary tags</i>
+      </blockquote>
+    </div>
+  );
+}
 ```
 
 - After starting to type, the user can use arrow keys to navigate.
