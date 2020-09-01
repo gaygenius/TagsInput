@@ -2,6 +2,8 @@
 
 I wrote this React tags input component from scratch.
 
+<img width="583" alt="Screen Shot 2020-09-01 at 11 26 36 AM" src="https://user-images.githubusercontent.com/890659/91891558-186ec580-ec46-11ea-98f2-bce39cedb431.png">
+
 ## Description
 
 This React component supports selecting tags from a list of entries provided or adding custom tags created on the fly.
