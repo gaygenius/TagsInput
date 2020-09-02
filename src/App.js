@@ -2,19 +2,41 @@ import React from 'react';
 import TagsInput from './components/TagsInput';
 import states from './data/states.json';
 
-import './styles.css';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>TagsInput component</h1>
+      <h1>TagsInput component (U.S. States)</h1>
       <TagsInput
         autocompleteEntries={states}
         placeholder="start typing the name of a state"
       />
       <blockquote>
-        <i>Select names of U.S. states or add arbitrary tags</i>
+        <i>Select a U.S. state by typing some letter in the state’s name.</i>
       </blockquote>
+      <h2>Additional features</h2>
+      <ul>
+        <li>
+          You can navigate autocomplete dropdown with{' '}
+          <span className="key-name">Up</span> and{' '}
+          <span className="key-name">Down</span> arrow keys.
+        </li>
+        <li>
+          You can add custom tags by typing the tag and pressing{' '}
+          <span className="key-name">Enter</span>.
+        </li>
+        <li>You can add remove a tag by clicking on the tag.</li>
+        <li>
+          With an empty input, can type <span className="key-name">Delete</span>{' '}
+          to delete the last tag.
+        </li>
+        <li>
+          If the dropdown is showing, you can click outside the input field to
+          close the dropdown. Clicking on the input field again will re-open the
+          dropdown.
+        </li>
+      </ul>
       <h2>Some other stuff</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis leo

@@ -1,10 +1,8 @@
 # A React TagsInput Component
 
-![#FF0000](https://placehold.it/15/FF0000/000000?text=+) __Note: This is an initial implementation and I plan to refactor it for readability and maintainability.__
-
 I wrote this React tags input component from scratch.
 
-<img width="583" alt="Screen Shot 2020-09-01 at 11 26 36 AM" src="https://user-images.githubusercontent.com/890659/91891558-186ec580-ec46-11ea-98f2-bce39cedb431.png">
+<img width="638" alt="TagsInput component to select U.S. state names" src="https://user-images.githubusercontent.com/890659/92015593-e329ac80-ed05-11ea-9a4e-6a47cfcc55a9.png">
 
 ## Description
 
@@ -27,16 +25,19 @@ function App() {
   return (
     <div className="App">
       <h1>TagsInput component</h1>
-      <TagsInput autocompleteEntries={states} />
+      <TagsInput
+        autocompleteEntries={states}
+        placeholder="start typing the name of a state"
+      />
       <blockquote>
-        <i>Select names of U.S. states or add arbitrary tags</i>
+        <i>Select a U.S. state by typing some letter in the state’s name.</i>
       </blockquote>
     </div>
   );
 }
 ```
 
-- After starting to type, the user can use arrow keys to navigate.
+- After starting to type, the user can use Down and Up arrow keys to navigate.
 - The user can create custom tags by typing Enter instead of selecting from dropdown.
 - The user can remove a tag by clicking on the tag. The user can also type Delete to delete the last tag.
 - If the dropdown is showing, the user can click outside the TagsInput component to close the dropdown. Clicking on the TagsInput field will re-open the dropdown.
