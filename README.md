@@ -37,11 +37,12 @@ function App() {
 }
 ```
 
-- After starting to type, the user can use Down and Up arrow keys to navigate.
-- The user can create custom tags by typing Enter instead of selecting from dropdown.
-- The user can remove a tag by clicking on the tag. The user can also type Delete to delete the last tag.
-- If the dropdown is showing, the user can click outside the TagsInput component to close the dropdown. Clicking on the TagsInput field will re-open the dropdown.
-- Storybook is supported.
+- After starting to type, the user can use `Down` and `Up` arrow keys to navigate.
+- The user can create custom tags by typing `Enter` instead of selecting from dropdown.
+- The user can remove a tag by clicking on the tag.
+- The user can type `Delete` to delete the last tag when the input field is empty.
+- If the dropdown is showing, the user can click outside the component to close the dropdown. Clicking on the input field will re-open the dropdown.
+- [Storybook](https://storybook.js.org/) is supported.
 
 ## Running the server
 
