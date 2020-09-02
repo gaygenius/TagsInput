@@ -160,12 +160,17 @@ export default function TagsInput({ autocompleteEntries = [] }) {
       <AutocompleteDropdown
         tagSuggestions={tagSuggestions}
         tagSuggestionIndex={tagSuggestionIndex}
+        handleSuggestionClick={handleSuggestionClick}
       />
     </div>
   );
 }
 
-const AutocompleteDropdown = ({ tagSuggestions, tagSuggestionIndex }) => {
+const AutocompleteDropdown = ({
+  tagSuggestions,
+  tagSuggestionIndex,
+  handleSuggestionClick,
+}) => {
   if (tagSuggestions.length === 0) return null;
   return (
     <div className="tags-autocomplete">
