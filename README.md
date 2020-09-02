@@ -8,7 +8,6 @@ I wrote this React tags input component from scratch.
 
 This React component supports selecting tags from a list of entries provided or adding custom tags created on the fly.
 
-
 - After starting to type, the user can use `Down` and `Up` arrow keys to navigate.
 - The user can create custom tags by typing `Enter` instead of selecting from dropdown.
 - The user can remove a tag by clicking on the tag.
@@ -50,21 +49,26 @@ function App() {
 }
 ```
 
-## Running the server
+### Running the server
 
 ```
 yarn
 yarn start
 ```
 
-## Running the tests
+### Running the tests
 
 ```
 yarn test
 ```
 
-## Running Storybook
+### Running Storybook
 
 ```
 yarn storybook
 ```
+
+## Future development ideas
+
+- A prop to indicate to only show autocomplete suggestions that start with the typed input.
+- Show fuzzy matches in autocomplete.
