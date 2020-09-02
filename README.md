@@ -1,6 +1,6 @@
 # A React TagsInput Component
 
-I wrote this React tags input component from scratch.
+I wrote this React tags input component from scratch. The first working version took less than an hour and did not support keyboard navigation. It still needs more tests and some refactoring to enhance readability and maintainability.
 
 <img width="200" alt="TagsInput component to select U.S. state names" src="https://user-images.githubusercontent.com/890659/92015593-e329ac80-ed05-11ea-9a4e-6a47cfcc55a9.png">
 
