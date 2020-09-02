@@ -9,10 +9,9 @@ const keys = {
 };
 
 const setup = props => {
-  const utils = render(<TagsInput {...props} />);
-  const inputField = utils.getByPlaceholderText(
-    'type and select or press enter to create new tag'
-  );
+  const placeholder = 'start typing here';
+  const utils = render(<TagsInput placeholder={placeholder} {...props} />);
+  const inputField = utils.getByPlaceholderText(placeholder);
   return { inputField, ...utils };
 };
 
@@ -43,22 +42,22 @@ test('user can add an autocomplete tag', () => {
 });
 
 test('user can delete last tag using keyboard', () => {
-  const autocompleteEntries = ['first', 'fast'].map(name => ({
-    name,
-  }));
-  const { inputField, queryByText } = setup({ autocompleteEntries });
-  const expectedFirstTag = 'x first';
+  const { inputField, queryByText } = setup({});
+  const firstTag = 'first';
+  const expectedFirstTag = `x ${firstTag}`;
   const tagToBeDeleted = 'last';
   const expectedTagToBeDeleted = `x ${tagToBeDeleted}`;
   expect(queryByText(expectedFirstTag)).toBeNull();
   expect(queryByText(expectedTagToBeDeleted)).toBeNull();
-  fireEvent.change(inputField, { target: { value: 'fir' } });
-  fireEvent.keyDown(inputField, keys.ArrowDown);
+  // enter two tags and confirm their presence
+  fireEvent.change(inputField, { target: { value: firstTag } });
   fireEvent.keyDown(inputField, keys.Enter);
-  expect(queryByText(expectedFirstTag)).toBeTruthy();
   fireEvent.change(inputField, { target: { value: tagToBeDeleted } });
   fireEvent.keyDown(inputField, keys.Enter);
+  expect(queryByText(expectedFirstTag)).toBeTruthy();
   expect(queryByText(expectedTagToBeDeleted)).toBeTruthy();
+  // hit Delete and confirm last tag was deleted
   fireEvent.keyDown(inputField, keys.BackSpace);
+  expect(queryByText(expectedFirstTag)).toBeTruthy();
   expect(queryByText(expectedTagToBeDeleted)).toBeNull();
 });

@@ -10,7 +10,10 @@ export default {
 export const Cocktails = () => (
   <div>
     <h1>Cocktails</h1>
-    <TagsInput autocompleteEntries={cocktails} />
+    <TagsInput
+      autocompleteEntries={cocktails}
+      placeholder="start typing a cocktail name"
+    />
     <blockquote>
       <i>Start typing names of cocktails and select from dropdown.</i>
     </blockquote>

@@ -14,7 +14,10 @@ const keyCodes = {
   KEYCODE_DOWN_ARROW: 40,
 };
 
-export default function TagsInput({ autocompleteEntries = [] }) {
+export default function TagsInput({
+  autocompleteEntries = [],
+  placeholder = 'type and select or press enter to create new tag',
+}) {
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState([]);
   const [tagSuggestions, setTagSuggestions] = useState([]);
@@ -154,7 +157,7 @@ export default function TagsInput({ autocompleteEntries = [] }) {
           onKeyDown={handleKeyDown}
           className="tags-tag-input"
           ref={tagInputRef}
-          placeholder="type and select or press enter to create new tag"
+          placeholder={placeholder}
         ></input>
       </div>
       <AutocompleteDropdown

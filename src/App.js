@@ -8,7 +8,10 @@ function App() {
   return (
     <div className="App">
       <h1>TagsInput component</h1>
-      <TagsInput autocompleteEntries={states} />
+      <TagsInput
+        autocompleteEntries={states}
+        placeholder="start typing the name of a state"
+      />
       <blockquote>
         <i>Select names of U.S. states or add arbitrary tags</i>
       </blockquote>
