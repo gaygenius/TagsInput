@@ -157,20 +157,28 @@ export default function TagsInput({ autocompleteEntries = [] }) {
           placeholder="type and select or press enter to create new tag"
         ></input>
       </div>
-      {tagSuggestions.length > 0 && (
-        <div className="tags-autocomplete">
-          {tagSuggestions.map(({ tagName, ref }, index) => (
-            <div
-              key={tagName}
-              ref={ref}
-              className={index === tagSuggestionIndex ? 'selected' : ''}
-              onClick={() => handleSuggestionClick(tagName)}
-            >
-              {tagName}
-            </div>
-          ))}
-        </div>
-      )}
+      <AutocompleteDropdown
+        tagSuggestions={tagSuggestions}
+        tagSuggestionIndex={tagSuggestionIndex}
+      />
     </div>
   );
 }
+
+const AutocompleteDropdown = ({ tagSuggestions, tagSuggestionIndex }) => {
+  if (tagSuggestions.length === 0) return null;
+  return (
+    <div className="tags-autocomplete">
+      {tagSuggestions.map(({ tagName, ref }, index) => (
+        <div
+          key={tagName}
+          ref={ref}
+          className={index === tagSuggestionIndex ? 'selected' : ''}
+          onClick={() => handleSuggestionClick(tagName)}
+        >
+          {tagName}
+        </div>
+      ))}
+    </div>
+  );
+};
